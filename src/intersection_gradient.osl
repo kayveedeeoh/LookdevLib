@@ -1,0 +1,10 @@
+shader IntersectionGradient(
+	output color Col = 0.8)
+
+{
+
+	point Pos = P;
+	float x = Pos[0];
+
+	Col = x;
+}	
