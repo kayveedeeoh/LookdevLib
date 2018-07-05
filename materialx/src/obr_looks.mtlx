@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<materialx version="1.36" cms="ocio" colorspace="acescg">
+	<xi:include href="/usr/local/solidangle/arnold/houdini/houdini-16.5.473/materialx/arnold/nodedefs.mtlx"/>
+	<material name="clay">
+		<shaderref name="shaderref1" node="standard_surface">
+			<bindinput name="base_color" type="color3" value="0.6, 0.6, 0.6"/>
+			<bindinput name="specular_roughness" type="color3" value="0.7, 0.7, 0.7"/>
+		</shaderref>
+	</material>
+	<collection name="assetcollection" includegeom="*"/>
+	<look name="look_clay">
+		<materialassign name="clay_assign" material="clay" collection="assetcollection"/>
+	</look>
+</materialx>
