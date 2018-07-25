@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<materialx version="1.36" cms="ocio" colorspace="acescg">
+	<xi:include href="arnold/nodedefs.mtlx"/>
+	<material name="base_mat">
+	</material>
+	<material name="clay_mat">
+		<shaderref name="shaderref2" node="standard_surface">
+			<bindinput name="base_color" type="color3" value="0.6, 0.6, 0.6"/>
+			<bindinput name="specular_roughness" type="float" value="1.0"/>
+		</shaderref>
+	</material>
+	<collection name="assetcollection" includegeom="*drop_assets_in_here*"/>
+	<look name="base">
+		<materialassign name="base_assign" material="base_mat" collection="assetcollection"/>
+	</look>
+	<look name="clay">
+		<materialassign name="clay_assign" material="clay_mat" collection="assetcollection"/>
+	</look>
+</materialx>

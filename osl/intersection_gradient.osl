@@ -1,0 +1,61 @@
+/*
+shader IntersectionGradient(
+	int Samples = 8, float Radius=0.01, output float Fac = 0.0)
+{
+	vector z = vector(0, 0, 1);
+    point initp = P + cross(z, N);    
+    float angle = M_2PI / Samples;  
+    
+    for (int i = 0; i < Samples; i++)
+    {
+        if(trace(P, initp, "maxdist", Radius))
+        {
+            Fac=1;
+            break;
+        }
+        initp = rotate(initp, angle, P, P + N);
+    }
+}
+*/
+
+ // Checks if, for this ray, the object is already inside the named object.
+ /*
+shader IntersectionGradient(   
+    string Container = "",
+    output int Inside = 0
+){
+    if(trace (P, backfacing() ? -I : I )) {
+        string name;
+        getmessage("trace", "geom:name", name);
+        if (regex_search(name, Conatainer)) {
+            Inside = 1;
+        }
+    }
+}
+*/
+
+shader IntersectionGradient(
+    string Container = "",
+    output int IsInside = 0
+)
+
+{      
+    int ray_depth;
+    getattribute("path:ray_depth", ray_depth);
+
+    if  ( ray_depth % 2  != 0){
+
+        string source_name = "";
+        int hit;
+        hit = trace (P,I);
+        getmessage ("trace", "geom:name", source_name);
+
+        printf("FOUND GEOM %s", source_name);
+
+        if (hit==1){
+            if (source_name == Container ){ 
+                IsInside =1;
+            }
+        }
+    }   
+}

@@ -1,0 +1,42 @@
+shader blur (
+	color Cin = color(1),
+	float amount = 0.1,
+	output color Cout = 0)
+{
+    //g = inversesqrt((M_2PI * pow(amount, 2)), -pow(dPdu,2)/pow(2 * amount, 2));
+    float M[9] =  { (1/16) * 1, (1/16) * 2, (1/16) * 1, 
+    				(1/16) * 2, (1/16) * 4, (1/16) * 2, 
+    				(1/16) * 1, (1/16) * 2, (1/16) * 1 };
+
+  	int x = 0;
+  	int y = 0;
+	//float sum[2] = {0, 0};
+
+	// Gaussian function
+	//for (x = -1; x <= 1; x++)
+	//{
+	//	for (y = -1; y <= 1; y++)
+	//	{
+	//	  float fl[2] = {u + x, v + y};
+	//	  sum += fl * (M[x+1][y+1])
+	//	}
+	//}
+	int height = 10;
+	int width = 19;
+
+	float c[3] = {0};
+	for (y = 0; y < 1080; y++)
+	{
+		for(x = 0; x < 1920; x++)
+		{
+			for(int i = 0; i < 3; i++)
+			{
+				// red component
+				//c[i] = c[i] + amount * (Cin[2 * (x + y * width) + i] - c[i]);
+				//c[i] = c[i] + amount * (Cin[i] * (x + y * width) + i) - c[i];
+				//Cout[i] = (c[i] / (x + y * width)) - i;
+			}
+		}
+	}
+	Cout = Cin;
+}
